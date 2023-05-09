@@ -1,0 +1,129 @@
+Sub GetID()
+Dim fso As Object, Drv As Object
+Dim sComm As String, tmpFile, biosSN
+'LAY BIOS
+On Error Resume Next
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    If DriveLetter <> "" Then
+        Set Drv = fso.GetDrive(DriveLetter)
+    Else
+        Set Drv = fso.GetDrive(fso.GetDriveName(Application.path))
+    End If
+    
+    With Drv
+        If .IsReady Then
+            DriveSerial = Abs(.SerialNumber)
+        Else
+            DriveSerial = -1
+        End If
+    End With
+    Set Drv = Nothing
+    Set fso = Nothing
+    'Range("C3").Value = DriveSerial
+'LAY BIOS
+Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
+Set colItems = objWMIService.ExecQuery("Select * from Win32_Processor")
+For Each objItem In colItems
+    Worksheets("S10001000").Cells(I01100011("O00000001"), I01100011("O00000001")).Value = objItem.ProcessorId
+    Range("I15").Value = DriveSerial & Range("A12").Value
+    'MsgBox "DI 1: " & DriveSerial & "ID 2:" & objItem.ProcessorId
+Next
+End Sub
+Sub I10100110()
+Dim O00000111, O10111111, O11000100 As Variant
+
+If Sheets("S10001000").Range("P15").Value <> 26 Then
+    MsgBox "Sai KEY. Vui long kiem tra lai"
+    Exit Sub
+Else
+
+    Worksheets("S00100111").Range("AW1").Value = Worksheets("S00100111").Range("AV1").Value
+
+    O10111111 = Sheets("S10001000").Cells(I01100011("O00000100"), I01100011("O00001001")).Value
+    If Worksheets("S10001000").Cells(I01100011("O00001001"), I01100011("O00000100")).Value = 5 Then
+        MsgBox "Ban da dang ky su dung cho 5 may"
+    
+        Exit Sub
+    End If
+    
+        Worksheets("S10001000").Range("U1").Value = Date - 1
+        
+
+        '..............
+        Call I00011110
+        O11000100 = Sheets("S10001000").Cells(I01100011("O00000001"), I01100011("O00000001")).Value
+        O00000111 = Mid(O10111111, I01100011("O00000010"), I01100011("O00000001"))
+        O00000111 = O00000111 & Mid(O10111111, I01100011("O00000101"), I01100011("O00000001"))
+        O00000111 = O00000111 & Mid(O10111111, I01100011("O00000011"), I01100011("O00000001"))
+        O00000111 = O00000111 & Mid(O10111111, I01100011("O00001001"), I01100011("O00000001"))
+        O00000111 = O00000111 & Mid(O10111111, I01100011("O00001101"), I01100011("O00000001"))
+        O00000111 = O00000111 & Mid(O10111111, I01100011("O00001011"), I01100011("O00000001"))
+        O00000111 = O00000111 & Mid(O10111111, I01100011("O00000110"), I01100011("O00000001"))
+        O00000111 = O00000111 & Mid(O10111111, I01100011("O00001000"), I01100011("O00000001"))
+        If O00000111 = O11010000 Or O00000111 = O00000001 Or O00000111 = O00011111 Then
+        O01011001 = I01100011("O00000001")
+        Else
+        O01011001 = I01100011("O00000000")
+        End If
+        '..........................
+        O00011110 = I01100011("O00000000")
+        Call I10011000
+        Call I11100000
+End If
+
+End Sub
+Sub I10011000()
+Dim O00000111, O10111111, O11000100 As Variant
+O10111111 = Sheets("S10001000").Cells(I01100011("O00000100"), I01100011("O00001001")).Value
+O11000100 = Sheets("S10001000").Cells(I01100011("O00000001"), I01100011("O00000001")).Value
+'..........................
+O00000111 = Mid(O10111111, I01100011("O00000111"), I01100011("O00000001"))
+O00000111 = O00000111 & Mid(O10111111, I01100011("O00001100"), I01100011("O00000001"))
+O00000111 = O00000111 & Mid(O10111111, I01100011("O00001010"), I01100011("O00000001"))
+O00000111 = O00000111 & Mid(O10111111, I01100011("O00000100"), I01100011("O00000001"))
+If O00000111 = Mid(O11000100, I01100011("O00001101"), I01100011("O00000100")) Then
+O00011110 = I01100011("O00000001")
+Else
+O00011110 = I01100011("O00000000")
+End If
+
+End Sub
+Sub I11100000()
+If O01011001 = I01100011("O00000001") And O00011110 = I01100011("O00000001") And Worksheets("S00100111").Range("AV19").Value = 0 Then
+    
+    Worksheets("S10001000").Range("A4:A8").Value = ""
+    
+    Worksheets("S00100111").Range("AU4").Value = 0
+    
+    
+    Worksheets("S00100111").Range("AX19").Value = Date
+    
+    Worksheets("THONGBAO").Range("C1").Value = Worksheets("S00100111").Range("AZ19").Value
+    '...................
+    Worksheets("S10001000").Range("A3").Offset(I01100011("O00000001") + Worksheets("S10001000").Cells(I01100011("O00001001"), I01100011("O00000100")).Value, 0).Value = Worksheets("S10001000").Cells(I01100011("O00000001"), I01100011("O00000001")).Value
+    Worksheets("S01111111").Activate
+    ' Worksheets("S01111111").Visible = True
+    Worksheets("S01111111").Activate
+    Worksheets("S10001000").Visible = xlVeryHidden
+    'MsgBox "DANG KY THANH CONG"
+    text = "" & ChrW$(272) & ChrW$(258) & "NG K" & ChrW$(221) & " TH" & ChrW$(192) & "NH C" & ChrW$(212) & "NG!"
+    MsgBoxUni text
+    Worksheets("S10001000").Range("U1").Value = Date
+    
+    Sheets("S10001000").Cells(I01100011("O00000100"), I01100011("O00001001")).Value = ""
+    O10000010 = I01100011("O00000001")
+    Sheets("S10001000").Cells(I01100011("O00000100"), I01100011("O00001101")).Value = ""
+    If Sheets("S00100111").Cells(I01100011("O00000100"), I01100011("O00001101")).Value = "" Then
+    Sheets("S00100111").Cells(I01100011("O00000100"), I01100011("O00001101")).Value = I01100011("O00000001")
+    Else
+    Sheets("S00100111").Cells(I01100011("O00000100"), I01100011("O00001101")).Value = Sheets("S00100111").Cells(I01100011("O00000100"), I01100011("O00001101")).Value + I01100011("O00000001")
+    End If
+Else
+    'MsgBox " SAI MA XAC NHAN,NHAP LAI"
+    text = "SAI M" & ChrW$(195) & " X" & ChrW$(193) & "C NH" & ChrW$(7852) & "N! VUI L" & ChrW$(210) & "NG NH" & ChrW$(7852) & "P L" & ChrW$(7840) & "I"
+    MsgBoxUni text
+
+    O10000010 = I01100011("O00000000")
+End If
+End Sub
+
